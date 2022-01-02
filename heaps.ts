@@ -1,4 +1,4 @@
-class MinHeap {
+export class MinHeap {
   data: number[]
 
   constructor() {
