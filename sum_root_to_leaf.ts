@@ -18,26 +18,17 @@ const three = new TreeNode(3)
 const two = new TreeNode(2, three, four)
 const root = new TreeNode(1, two, five)
 
-const sumRootToLeaf = (root: TreeNode | null) => {
-  if (root.val === null) return
-  let paths = []
-
-  dfs(root, '', paths)
-  return paths.reduce((sum, val) => sum += +val, 0)
-}
-
-const dfs = (root: TreeNode | null, path: string, paths: string[]) => {
+const sumRootToLeaf = (root: TreeNode | null, path = '', paths = []) => {
+  if (root === null) return null
   path += root.val
 
-  if (root.left === null && root.right === null) {
-    paths.push(path)
-    return
-  }
+  if (root.left === null && root.right === null) paths.push(path)
   
+  if (root.left !== null) sumRootToLeaf(root.left, path, paths)
   
-  if (root.left !== null) dfs(root.left, path, paths)
-  
-  if (root.right !== null) dfs(root.right, path, paths)
+  if (root.right !== null) sumRootToLeaf(root.right, path, paths)
+
+  return paths.reduce((sum, val) => sum += +val, 0)
 }
 
 console.log(sumRootToLeaf(root));
