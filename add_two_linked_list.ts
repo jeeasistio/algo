@@ -2,12 +2,12 @@ class ListNode {
   constructor(public val?: number, public next?: ListNode | null) {}
 }
 
-const one = new ListNode(1)
-const two = new ListNode(2, one)
-const three = new ListNode(3, two)
-const one2 = new ListNode(1)
-const two2 = new ListNode(2, one2)
-const three2 = new ListNode(3, two)
+const three = new ListNode(3)
+const four = new ListNode(4, three)
+const root = new ListNode(2, four)
+const four1 = new ListNode(4)
+const six = new ListNode(6, four1)
+const root2 = new ListNode(5, six)
 
 const addTwoNumbers = (
   l1: ListNode | null,
@@ -19,13 +19,15 @@ const addTwoNumbers = (
   let curr = dummyHead
   let carry = 0
 
-  while (up !== null && down !== null) {
-    const sum = carry + up.val + down.val
+  while (up || down) {
+    const addendUp = up ? up.val : 0
+    const addendDown = down ? down.val : 0
+    const sum = carry + addendUp + addendDown
     carry = Math.floor(sum / 10)
     curr.next = new ListNode(sum % 10)
     curr = curr.next
-    up = up.next
-    down = down.next
+    up = up?.next
+    down = down?.next
   }
 
   if (carry > 0) {
@@ -35,4 +37,4 @@ const addTwoNumbers = (
   return dummyHead.next
 }
 
-console.log(addTwoNumbers(three, three2))
+console.log(addTwoNumbers(root, root2))
