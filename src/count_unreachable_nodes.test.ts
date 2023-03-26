@@ -22,6 +22,22 @@ describe('return the number of pairs of different nodes that are unreachable fro
             ] as [number, number][],
             14,
         ],
+        [
+            11,
+            [
+                [5, 0],
+                [1, 0],
+                [10, 7],
+                [9, 8],
+                [7, 2],
+                [1, 3],
+                [0, 2],
+                [8, 5],
+                [4, 6],
+                [4, 2],
+            ] as [number, number][],
+            0,
+        ],
     ])('should return the number of pairs', (num, connections, expected) => {
         expect(countUnreachableNodes(num, connections)).toBe(expected)
     })
